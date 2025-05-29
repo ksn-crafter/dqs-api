@@ -1,0 +1,6 @@
+#used for deployment
+namespace: dqs-app
+imageUri: ''
+
+#used by application
+API_ALLOWED_ORIGINS: ''

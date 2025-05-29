@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dqs-api-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: dqs-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dqs-api
+  template:
+    metadata:
+      labels:
+        app: dqs-api
+    spec:
+      containers:
+      - name: dqs-api-container
+        image: {{ .Values.imageUri }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+          - name: API_ALLOWED_ORIGINS
+            value: {{ .Values.API_ALLOWED_ORIGINS}}
