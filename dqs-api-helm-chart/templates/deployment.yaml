@@ -24,3 +24,5 @@ spec:
         env:
           - name: API_ALLOWED_ORIGINS
             value: {{ .Values.API_ALLOWED_ORIGINS}}
+          - name: KAFKA_BOOTSTRAP_SERVERS
+            value: {{ .Values.KAFKA_BOOTSTRAP_SERVERS}}
