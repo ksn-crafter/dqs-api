@@ -26,3 +26,5 @@ spec:
             value: {{ .Values.API_ALLOWED_ORIGINS}}
           - name: KAFKA_BOOTSTRAP_SERVERS
             value: {{ .Values.KAFKA_BOOTSTRAP_SERVERS}}
+          - name: MONGO_DB_URL
+            value: { { .Values.MONGO_DB_URL } }
