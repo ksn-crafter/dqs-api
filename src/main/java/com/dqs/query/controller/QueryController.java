@@ -25,8 +25,9 @@ public class QueryController {
     @PostMapping("/query")
     public QueryId submit(@RequestBody Query query) {
         QueryId queryId = new QueryId(this.idGenerator.generate());
-        this.queryReceivedPublisher.publish(new QueryReceived(queryId, query));
+        System.out.println("Generated queryId " + queryId.id().toString() + " for the term " + query.term() + " for the tenant " + query.tenant());
 
+        this.queryReceivedPublisher.publish(new QueryReceived(queryId, query));
         return queryId;
     }
 }

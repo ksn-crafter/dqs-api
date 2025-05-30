@@ -16,6 +16,7 @@ public class QueryReceivedPublisher {
     }
 
     public void publish(QueryReceived event) {
+        System.out.println("Publishing QueryReceived event for queryId " + event.queryId());
         kafkaTemplate.send(topicNameFor(event.tenant()),
                 event.queryId(),
                 event);
