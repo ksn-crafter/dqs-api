@@ -23,7 +23,7 @@ public class QueryStatusController {
     public QueryStatus get(@PathVariable("id") String queryId) {
         System.out.println("Finding the status of queryId " + queryId);
         return this.queryStatusService
-                .statusFor(queryId)
+                .statusOf(queryId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "QueryId not found"));
     }
 }

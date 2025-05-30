@@ -16,7 +16,7 @@ public class QueryStatusService {
         this.queryStatusRepository = queryStatusRepository;
     }
 
-    public Optional<QueryStatus> statusFor(String queryId) {
+    public Optional<QueryStatus> statusOf(String queryId) {
         Optional<QueryDescription> optionalQueryDescription = this.queryStatusRepository.findById(queryId);
         System.out.println("Query found by queryId? " + optionalQueryDescription.isPresent());
 
