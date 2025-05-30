@@ -87,19 +87,53 @@ class QueryStatusControllerIntegrationTest {
     }
 
     @Test
-    void getQueryStatusOfAnInProgressQuery() throws Exception {
+    void getQueryStatusOfAnAcknowledgedQuery() throws Exception {
         queryStatusRepository.deleteById("query-2");
 
         LocalDateTime creationTime = LocalDateTime.now();
-        QueryDescription queryDescription = new QueryDescription("query-2", "JPMC", "Historical", 2001, 2005, Status.InProgress, creationTime);
+        QueryDescription queryDescription = new QueryDescription("query-2", "JPMC", "Historical", 2001, 2005, Status.Acknowledged, creationTime);
         queryStatusRepository.save(queryDescription);
 
         mockMvc.perform(get("/v1/queries/query-2/status"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.status").value(Status.InProgress.toString()))
+                .andExpect(jsonPath("$.status").value(Status.Acknowledged.toString()))
                 .andExpect(jsonPath("$.completionDurationInSeconds").doesNotExist())
                 .andExpect(jsonPath("$.queryId").value("query-2"))
+                .andExpect(jsonPath("$.term").value("Historical"));
+    }
+
+    @Test
+    void getQueryStatusOfAnInProgressQuery() throws Exception {
+        queryStatusRepository.deleteById("query-3");
+
+        LocalDateTime creationTime = LocalDateTime.now();
+        QueryDescription queryDescription = new QueryDescription("query-3", "JPMC", "Historical", 2001, 2005, Status.InProgress, creationTime);
+        queryStatusRepository.save(queryDescription);
+
+        mockMvc.perform(get("/v1/queries/query-3/status"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.status").value(Status.InProgress.toString()))
+                .andExpect(jsonPath("$.completionDurationInSeconds").doesNotExist())
+                .andExpect(jsonPath("$.queryId").value("query-3"))
+                .andExpect(jsonPath("$.term").value("Historical"));
+    }
+
+    @Test
+    void getQueryStatusOfAFailedQuery() throws Exception {
+        queryStatusRepository.deleteById("query-4");
+
+        LocalDateTime creationTime = LocalDateTime.now();
+        QueryDescription queryDescription = new QueryDescription("query-4", "JPMC", "Historical", 2001, 2005, Status.Failed, creationTime);
+        queryStatusRepository.save(queryDescription);
+
+        mockMvc.perform(get("/v1/queries/query-4/status"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.status").value(Status.Failed.toString()))
+                .andExpect(jsonPath("$.completionDurationInSeconds").doesNotExist())
+                .andExpect(jsonPath("$.queryId").value("query-4"))
                 .andExpect(jsonPath("$.term").value("Historical"));
     }
 
