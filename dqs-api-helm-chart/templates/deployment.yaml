@@ -15,6 +15,7 @@ spec:
       labels:
         app: dqs-api
     spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: dqs-api-container
         image: {{ .Values.imageUri }}
@@ -27,4 +28,4 @@ spec:
           - name: KAFKA_BOOTSTRAP_SERVERS
             value: {{ .Values.KAFKA_BOOTSTRAP_SERVERS}}
           - name: MONGO_DB_URL
-            value: { { .Values.MONGO_DB_URL } }
+            value: {{ .Values.MONGO_DB_URL }}
