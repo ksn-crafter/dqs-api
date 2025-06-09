@@ -11,6 +11,7 @@ public class WebCorsConfiguration {
 
     @Bean
     public WebMvcConfigurer corsConfigurer(@Value("${api.cors.origins}") String allowedOrigins) {
+        System.out.println("Allowed origins: " + allowedOrigins);
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
