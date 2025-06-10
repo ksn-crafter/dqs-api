@@ -18,8 +18,8 @@ public class WebCorsConfiguration {
                 registry.addMapping("/**") // Allow CORS for all endpoints
                         .allowedOrigins("*") // Specify allowed origins
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allowed HTTP methods
-                        .allowedHeaders("*") // Allow all headers
-                        .allowCredentials(true); // Allow cookies/auth headers
+                        .allowedHeaders("*"); // Allow all headers
+                        //.allowCredentials(true); // Allow cookies/auth headers
             }
         };
     }
