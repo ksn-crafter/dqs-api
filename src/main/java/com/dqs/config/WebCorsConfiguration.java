@@ -16,7 +16,7 @@ public class WebCorsConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Allow CORS for all endpoints
-                        .allowedOrigins("*") // Specify allowed origins
+                        .allowedOrigins("*") // Allow all origins temporarily
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Allowed HTTP methods
                         .allowedHeaders("*"); // Allow all headers
                         //.allowCredentials(true); // Allow cookies/auth headers
